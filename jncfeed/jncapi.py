@@ -1,4 +1,4 @@
-# JNCFeed is a Python application that can inform you the latest parts availability of your subscribed series on
+# JNCFeed is a Python application that can inform you the latest parts availability of your followed series on
 # J-Novel Club.
 
 # Copyright (C) 2021 Miracutor

@@ -1,4 +1,4 @@
-# JNCFeed is a Python application that can inform you the latest parts availability of your subscribed series on
+# JNCFeed is a Python application that can inform you the latest parts availability of your followed series on
 # J-Novel Club.
 
 # Copyright (C) 2021 Miracutor
@@ -94,8 +94,9 @@ def main():
 
         scheduler.shutdown(wait=False)
     else:
-        jnc_email, jnc_password = login_window()
-        configure_setup(jnc_email, jnc_password)
+        jnc_email, jnc_password, status = login_window()
+        if status == "OK":
+            configure_setup(jnc_email, jnc_password)
 
 
 if __name__ == "__main__":
