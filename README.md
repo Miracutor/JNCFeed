@@ -10,20 +10,30 @@ A Python application that can inform you of the latest parts availability of you
 
 ## Disclaimer
 JNCFeed is completely unaffiliated with J-Novel Club.
-The logo that used in this program is completely owned by J-Novel Club.
-It is only used as a visual aid for the user.
-## Usage
+The logo that used in this program owned by J-Novel Club.
+It is only used in this app as a visual aid for the user.
+## Screenshots
+![](media/screenshot-login-screen.png)
+![](media/screenshot-tray-menu.png)
+## Installation
 1. Make sure you have a J-Novel Club account and an active subscription (Free or Premium) on the site.
-2. Download the zip from the Release page.
+2. Download the zip from the [Releases](https://github.com/Miracutor/JNCFeed/releases/) page.
 3. Extract to any folder that you want. Preferably, placed on easy to access place.
-4. Make sure to add the folder and JNCFeed.exe into your Antivirus Exclusion List.
-   For some reason, the antivirus detects the way this app implements notification as harmful.
-   This may change when I find better implementation to the notification part.
-5. Launch this application, JNCFeed.exe. You will be prompted to enter your login credentials.
+4. Launch this application, JNCFeed.exe. You will be prompted to enter your login credentials.
    This process will only be done once. (And the app will also not going to keep your login info. Don't worry!)
-6. Launch the application again. You will see the app icon on the system tray. You can use that tray to quit the app.
+5. Launch the application again. You will see the app icon on the system tray. You can use that tray to quit the app.
+## Usage
+- Just launch JNCFeed.exe and when the icon appears on the system tray, the app successfully launched.
+- You will receive the notification at the start of the application and in interval of 30 minutes after launch.
+- Right-click the icon on the system tray and click "Quit" to quit the application.
+## Tips
+- Add the application shortcut to Startup folder to make sure the application launch automatically every time you open your computer.
+  You can access the Startup folder by pressing Windows key + R and type ```shell:startup```.
+- You can reset the app data by deleting .jncfeed folder in User directory.
+  Next time you launch the application again, you will be prompted to the login screen.
 ## Building
 ### Requirements
+- Windows 10. (Other platforms may and may not work. Never tested, so I don't know.)
 - Python 3.7 and above. I used Python 3.7.9 when developing and building this app.
 ### Instructions
 1. Rebuild the Pyinstaller bootloader.
