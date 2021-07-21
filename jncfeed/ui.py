@@ -1,4 +1,4 @@
-# JNCFeed is a Python application that can inform you the latest parts availability of your subscribed series on
+# JNCFeed is a Python application that can inform you the latest parts availability of your followed series on
 # J-Novel Club.
 
 # Copyright (C) 2021 Miracutor
@@ -15,7 +15,6 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import sys
 import PySimpleGUIQt as sg
 import re
 
@@ -27,7 +26,7 @@ jnc_title = b"iVBORw0KGgoAAAANSUhEUgAAAVIAAABYCAMAAACQ548PAAAAAXNSR0IArs4c6QAAAA
 
 
 def error_window(title, message):
-    err_window = sg.Window(
+    window = sg.Window(
         title,
         [
             [sg.Text(message, font=("Roboto", 12))],
@@ -38,10 +37,10 @@ def error_window(title, message):
         icon=icon,
     )
     while True:
-        err_event, err_values = err_window.read()
-        if err_event in (sg.WIN_CLOSED, "OK"):
+        event, values = window.read()
+        if event in (sg.WIN_CLOSED, "OK"):
             break
-    err_window.close()
+    window.close()
 
 
 def system_tray():
@@ -87,6 +86,7 @@ def login_window():
         icon=icon,
     )
     email_regex = re.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+    status = ""  # Convey status to main function.
     # Create an event loop
     while True:
         event, values = window.read()
@@ -98,9 +98,11 @@ def login_window():
             elif not email_regex.match(str(values["-email-"])):
                 error_window("Error", "Invalid email.")
             else:
+                status = "OK"
                 break
 
         if event in (sg.WIN_CLOSED, "Cancel"):
-            sys.exit(1)
+            status = "Cancel"
+            break
     window.close()
-    return values["-email-"], values["-password-"]
+    return values["-email-"], values["-password-"], status
