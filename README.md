@@ -29,15 +29,16 @@ It is only used in this app as a visual aid for the user.
 ## Tips
 - Add the application shortcut to Startup folder to make sure the application launch automatically every time you open your computer.
   You can access the Startup folder by pressing Windows key + R and type ```shell:startup```.
-- You can reset the app data by deleting .jncfeed folder in User directory.
+- You can reset the app data by deleting .jncfeed folder in Home directory. (For Windows, it is C:\Users\\[username])  
   Next time you launch the application again, you will be prompted to the login screen.
 ## Building
 ### Requirements
 - Windows 10. (Other platforms may and may not work. Never tested, so I don't know.)
 - Python 3.7 and above. I used Python 3.7.9 when developing and building this app.
+- Pipenv tool (https://pypi.org/project/pipenv/)
 ### Instructions
 1. Rebuild the Pyinstaller bootloader.
-   This step is to reduce this program false positive detection as a virus. (It's not a virus!🤣)
+   This step is required to reduce this program false positive detection as a virus. (It's not a virus!🤣)
    - Download the latest release of Pyinstaller archive [here](https://github.com/pyinstaller/pyinstaller/releases).
      Make sure it is the same version as the latest on PyPi.
    - Extract the archive.
@@ -45,16 +46,16 @@ It is only used in this app as a visual aid for the user.
    - Go back to UnpackedFolder and create a wheel using extra commands based on your platform not using the generic bdist_wheel command.
      Check out the extra commands using ```python setup.py --help-commands```.
    - Edit the pyinstaller path on Pipfile to your generated wheel.
-2. Set up the development environment.
-   >pipenv install --dev
+2. Set up the development environment.  
+   > pipenv install --dev
 3. (Windows) Update SQLite
    Because Python 3.7, 3.8 on Windows used older SQLite dll, it needs to be updated to the latest version.
    - Download the dll [here](https://www.sqlite.org/download.html).
    - After that, make a backup of the original sqlite3.dll in Python37/dll and replace it with the new version.
 4. Start building!
-   - For Windows:
+   - For Windows:  
    > pipenv run build-win
-   - For other platforms:
+   - For other platforms:  
    > pipenv run build-other
 5. Finished build on dist folder.
 ## License
