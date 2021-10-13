@@ -46,7 +46,7 @@ def error_window(title, message):
 def system_tray():
     menu_def = [
         "BLANK",
-        ["Quit", "---", "!JNCFeed v1.0.0", "!by Miracutor"],
+        ["!JNCFeed v1.0.1", "!by Miracutor", "---", "Quit"],
     ]
 
     tray = sg.SystemTray(menu_def, tooltip="JNCFeed", data_base64=icon)
@@ -93,7 +93,7 @@ def login_window():
         # End program if user closes window or
         # presses the OK button
         if event == "OK":
-            if values["-email-"] is "" or values["-password-"] is "":
+            if values["-email-"] == "" or values["-password-"] == "":
                 error_window("Error", "Empty email or password.")
             elif not email_regex.match(str(values["-email-"])):
                 error_window("Error", "Invalid email.")

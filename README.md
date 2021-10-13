@@ -17,12 +17,12 @@ It is only used in this app as a visual aid for the user.
 ![](media/screenshot-tray-menu.png)
 ## Installation
 1. Make sure you have a J-Novel Club account and an active subscription (Free or Premium) on the site.
-2. Download the zip from the [Releases](https://github.com/Miracutor/JNCFeed/releases/) page.
-3. Extract to any folder that you want. Preferably, placed on easy to access place.
-4. Launch this application, JNCFeed.exe. You will be prompted to enter your login credentials.
-   This process will only be done once. (And the app will also not going to keep your login info. Don't worry!)
-5. Launch the application again. You will see the app icon on the system tray. You can use that tray to quit the app.
+2. Download the Installer or zip from the [Releases](https://github.com/Miracutor/JNCFeed/releases/) page.
+3. (Installer) Just launch the installer normally.
+4. (Zip only) Extract to any folder that you want. Preferably, placed on easy to access place.
+5. (Zip only) Pin the JNCFeed.exe to Start. This is needed to make sure notification work properly.
 ## Usage
+- (First time only) You will be prompted to enter your login credentials. When you successfully log in, you need to relaunch the application.
 - Just launch JNCFeed.exe and when the icon appears on the system tray, the app successfully launched.
 - You will receive the notification at the start of the application and in interval of 30 minutes after launch.
 - Right-click the icon on the system tray and click "Quit" to quit the application.
@@ -34,7 +34,7 @@ It is only used in this app as a visual aid for the user.
 ## Building
 ### Requirements
 - Windows 10. (Other platforms may and may not work. Never tested, so I don't know.)
-- Python 3.7 and above. I used Python 3.7.9 when developing and building this app.
+- Python 3.8 and above. I used Python 3.8.10 when developing and building this app.
 - Pipenv tool (https://pypi.org/project/pipenv/)
 ### Instructions
 1. Rebuild the Pyinstaller bootloader.
@@ -49,19 +49,20 @@ It is only used in this app as a visual aid for the user.
 2. Set up the development environment.  
    > pipenv install --dev
 3. (Windows) Update SQLite
-   Because Python 3.7, 3.8 on Windows used older SQLite dll, it needs to be updated to the latest version.
+   Because Python 3.8 on Windows used older SQLite dll, it needs to be updated to the latest version.
    - Download the dll [here](https://www.sqlite.org/download.html).
    - After that, make a backup of the original sqlite3.dll in Python37/dll and replace it with the new version.
 4. Start building!
-   - For Windows:  
-   > pipenv run build-win
-   - For other platforms:  
-   > pipenv run build-other
+   - For clean build:  
+   > pipenv run build
+   - For dirty build  (if you make small changes and want to quickly rebuild):  
+   > pipenv run dirty-build
 5. Finished build on dist folder.
 ## License
 JNCFeed is licensed under the GPLv3.0 license. Refer to [LICENSE](LICENSE) for more information.
 ```
-JNCFeed is a Python application that can inform you of the latest parts availability of your followed series on J-Novel Club.
+JNCFeed is a Python application that can inform you of the latest parts 
+availability of your followed series on J-Novel Club.
 
 Copyright (C) 2021 Miracutor
 
@@ -78,5 +79,3 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
-## Credits
-Done for you - from [Notification Sounds](https://notificationsounds.com/)

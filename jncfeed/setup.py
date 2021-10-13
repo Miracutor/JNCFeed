@@ -44,8 +44,7 @@ def configure_setup(jnc_email, jnc_password):
         reader.add_feed(generate_jnc_rss_link(json.loads(user_data)["userId"]))
         reader.update_feeds()
         for entry in reader.get_entries():
-            reader.mark_entry_as_read(
-                entry
-            )  # Mark all entries as read at the time of setup.
-        error_window("Success", "Login Successful. Please launch the application.")
+            reader.set_entry_read(entry, True)
+            # Mark all entries as read at the time of setup.
+        error_window("Success", "Login Successful. Please relaunch the application.")
         sys.exit(2)

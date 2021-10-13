@@ -5,21 +5,21 @@ name = "pypi"
 
 [packages]
 reader = "*"
-notify-py = "*"
 requests = "*"
 pysimpleguiqt = "*"
 apscheduler = "*"
+winrt = "*"
 
 [dev-packages]
 black = "*"
-pyinstaller = {path = "F:/Downloads/Compressed/pyinstaller-4.4/dist/pyinstaller-4.4-py3-none-win_amd64.whl"}
+pyinstaller = {path = "F:/Workspace/Built Dependency/pyinstaller-4.4/dist/pyinstaller-4.4-py3-none-win_amd64.whl"}
 
 [scripts]
-build-win = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --add-data media/done-for-you.wav;. --noconsole --clean jncfeed/main.py"
-build-other = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed --add-data media/logo.ico:. --add-data media/done-for-you.wav:. --clean jncfeed/main.py"
+build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --noconsole --clean jncfeed/main.py"
+dirty-build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --noconsole jncfeed/main.py"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
 
 [pipenv]
 allow_prereleases = true

@@ -22,19 +22,20 @@ from pathlib import Path
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
-from notifypy import Notify
 from reader import make_reader
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 from jncfeed.setup import configure_setup
 from jncfeed.ui import system_tray, login_window
+from jncfeed.notifywin import identify_app_id, toast_notification
 
 path_config_dir = Path.home() / Path(".jncfeed")
 path_config = path_config_dir / Path("config")
 path_database = path_config_dir / Path("db.sqlite")
 rss_reader = None
 jnc_username = None
+appId = None
 
 
 def check_setup():
@@ -51,19 +52,13 @@ def check_setup():
 
 
 def generate_jnc_notification(message: str):
-    notification = Notify()
-    notification.application_name = "JNCFeed"
-    notification.title = f"{jnc_username}'s Followed Series"
-    notification.message = message
-    notification.icon = "logo.ico"
-    notification.audio = "done-for-you.wav"
-    notification.send()
+    toast_notification(appId, f"{jnc_username}'s Followed Series", message, "logo.ico")
 
 
 def load_reader():
     global rss_reader
     if not path_config.exists():
-        print("You still not setup your configuration. Please run setup once.")
+        print("You still have not set up your account. Please run setup once.")
         sys.exit(2)
     else:
         rss_reader = make_reader(str(path_database.resolve()))
@@ -80,9 +75,13 @@ def update_jnc_feed(jnc_reader):
 
 
 def main():
-    global jnc_username
+    global jnc_username, appId
 
     if check_setup() is True:
+        appId = identify_app_id("JNCFeed")
+        if appId == "":
+            appId = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\powershell.exe"
+
         scheduler = BackgroundScheduler()
         jnc_username = json.loads(path_config.read_text())["userName"]
         job = scheduler.add_job(load_reader, IntervalTrigger(minutes=30))
