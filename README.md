@@ -1,4 +1,4 @@
-# ![](media/logo.png) JNCFeed
+# ![](media/logo.ico) JNCFeed
 A Python application that can inform you of the latest parts availability of your followed series on J-Novel Club.  
   
 [![GitHub license](https://img.shields.io/github/license/Miracutor/JNCFeed.svg)](https://github.com/Miracutor/JNCFeed/blob/master/LICENSE)
