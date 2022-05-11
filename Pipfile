@@ -6,17 +6,20 @@ name = "pypi"
 [packages]
 reader = "*"
 requests = "*"
-pysimpleguiqt = "*"
+pysimplegui = "*"
+psgtray = "*"
 apscheduler = "*"
 winrt = "*"
 
 [dev-packages]
 black = "*"
-pyinstaller = {path = "F:/Workspace/Built Dependency/pyinstaller-4.4/dist/pyinstaller-4.4-py3-none-win_amd64.whl"}
+pyinstaller = {path = "F:/Workspace/Built Dependency/pyinstaller-4.5/dist/pyinstaller-4.5-py3-none-win_amd64.whl"}
 
 [scripts]
-build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --noconsole --clean jncfeed/main.py"
-dirty-build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --noconsole jncfeed/main.py"
+build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --hidden-import 'reader.plugins.ua_fallback' --noconsole --clean jncfeed/main.py"
+dirty-build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --hidden-import 'reader.plugins.ua_fallback' --noconsole jncfeed/main.py"
+build-onefile = "pipenv run pyinstaller -F --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --hidden-import 'reader.plugins.ua_fallback' --noconsole --clean jncfeed/main.py"
+dirty-build-onefile = "pipenv run pyinstaller -F --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --hidden-import 'reader.plugins.ua_fallback' --noconsole jncfeed/main.py"
 
 [requires]
 python_version = "3.8"
