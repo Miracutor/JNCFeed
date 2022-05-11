@@ -218,7 +218,7 @@ def settings_window(job_instance: Job, path_config: Path):
             ),
             sg.T("Next Update", font="Roboto", size=10),
             sg.Input(
-                job_instance.next_run_time.strftime("%A - %H:%M:%S"),
+                job_instance.next_run_time.strftime("%a - %H:%M:%S"),
                 key="-time-",
                 font="Roboto",
                 disabled=True,
