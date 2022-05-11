@@ -24,10 +24,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 from reader import make_reader
 
-__version__ = "1.0.1"
-
 from jncfeed.setup import configure_setup
-from jncfeed.ui import system_tray, login_window
+from jncfeed.ui import system_tray, login_window, error_window
 from jncfeed.notifywin import identify_app_id, toast_notification
 
 path_config_dir = Path.home() / Path(".jncfeed")
@@ -82,20 +80,39 @@ def main():
         if appId == "":
             appId = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\powershell.exe"
 
+        # check the existence of the logo.ico file
+        if not (Path(sys.executable).parent / Path("logo.ico")).exists():
+            # if not, display error_window with error message
+            error_window(
+                "Error",
+                "logo.ico not found. Please put logo.ico in the same directory as this file.",
+            )
+            sys.exit(2)
+
         scheduler = BackgroundScheduler()
         jnc_username = json.loads(path_config.read_text())["userName"]
-        job = scheduler.add_job(load_reader, IntervalTrigger(minutes=30))
+        job = scheduler.add_job(
+            load_reader,
+            IntervalTrigger(seconds=json.loads(path_config.read_text())["interval"]),
+        )
 
         load_reader()
         scheduler.start()
-        system_tray()
+        system_tray(job, path_config)
         job.remove()
-
         scheduler.shutdown(wait=False)
     else:
         jnc_email, jnc_password, status = login_window()
         if status == "OK":
-            configure_setup(jnc_email, jnc_password)
+            setup_status = configure_setup(jnc_email, jnc_password)
+            if setup_status is True:
+                error_window(
+                    "Success", "Login Successful. Please relaunch the application."
+                )
+                sys.exit(2)
+            else:
+                error_window("Error", "Login Failed. Please try again.")
+                sys.exit(3)
 
 
 if __name__ == "__main__":

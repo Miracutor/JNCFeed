@@ -16,12 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import json
-import sys
 from pathlib import Path
 from jncfeed.jncapi import get_user
 from reader import make_reader
-
-from jncfeed.ui import error_window
 
 path_config_dir = Path.home() / Path(".jncfeed")
 path_config = path_config_dir / Path("config")
@@ -36,15 +33,13 @@ def configure_setup(jnc_email, jnc_password):
     path_config_dir.mkdir(exist_ok=True)
     user_data = get_user(jnc_email, jnc_password)
     if "LOGIN_FAILED" in user_data:
-        error_window("Error", "Login Failed. Please try again.")
-        sys.exit(2)
+        return False
     else:
         path_config.write_text(user_data)
         reader = make_reader(str(path_database.resolve()))
         reader.add_feed(generate_jnc_rss_link(json.loads(user_data)["userId"]))
         reader.update_feeds()
         for entry in reader.get_entries():
-            reader.set_entry_read(entry, True)
+            reader.mark_entry_as_read(entry)
             # Mark all entries as read at the time of setup.
-        error_window("Success", "Login Successful. Please relaunch the application.")
-        sys.exit(2)
+        return True

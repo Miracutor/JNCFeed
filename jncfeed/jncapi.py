@@ -38,6 +38,7 @@ def get_user(user, password):
             {
                 "userName": data.json()["user"]["username"],
                 "userId": data.json()["userId"],
+                "interval": 3600,
             }
         )
     return user_data

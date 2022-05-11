@@ -15,6 +15,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import sys
+
 from winrt.windows.ui.notifications import (
     ToastNotificationManager,
     ToastNotification,
@@ -25,7 +27,7 @@ from pathlib import Path
 from xml.etree import ElementTree
 
 
-def toast_notification(AppID, title, text, image_src):
+def toast_notification(app_id, title, text, image_src):
     top = ElementTree.Element("toast")
     top.set("duration", "short")
     visual = ElementTree.SubElement(top, "visual")
@@ -35,7 +37,9 @@ def toast_notification(AppID, title, text, image_src):
     image_tag = ElementTree.SubElement(binding, "image")
     image_tag.set("id", "1")
     image_tag.set("placement", "appLogoOverride")
-    image_tag.set("src", str(Path(image_src).absolute()))
+    image_tag.set(
+        "src", str((Path(sys.executable).parent / Path(image_src)).absolute())
+    )
     title_tag = ElementTree.SubElement(binding, "text")
     title_tag.set("id", "1")
     title_tag.text = title
@@ -45,17 +49,19 @@ def toast_notification(AppID, title, text, image_src):
 
     doc = XmlDocument()
     doc.load_xml(ElementTree.tostring(top, encoding="utf-8").decode("utf-8"))
-    notifier = ToastNotificationManager.create_toast_notifier(AppID)
+    notifier = ToastNotificationManager.create_toast_notifier(app_id)
     notifier.show(ToastNotification(doc))
 
 
-def identify_app_id(appName: str):
-    command = "& {(Get-StartApps " + appName + ")[0].AppId}"
+def identify_app_id(app_name: str):
+    command = "& {(Get-StartApps " + app_name + ")[0].AppId}"
     startupinfo = subprocess.STARTUPINFO()
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     i, _ = subprocess.Popen(
         ["Powershell", "-Command", command],
         stdout=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT,
         startupinfo=startupinfo,
     ).communicate()
     return i.decode("utf-8").replace("\r\n", "")
