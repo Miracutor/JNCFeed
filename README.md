@@ -2,7 +2,7 @@
 An app that can notify you when the latest parts available of your followed series on J-Novel Club.
 
 ![Language](https://img.shields.io/badge/language-python-blue?style=flat-square&logo=python&logoColor=yellow)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)  
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 [![GitHub license](https://img.shields.io/github/license/Miracutor/JNCFeed?style=flat-square)](https://github.com/Miracutor/JNCFeed/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/Miracutor/JNCFeed?include_prereleases&sort=semver&style=flat-square)](https://github.com/Miracutor/JNCFeed/releases/)
 [![Github all releases](https://img.shields.io/github/downloads/Miracutor/JNCFeed/total?style=flat-square)](https://GitHub.com/Miracutor/JNCFeed/releases/)
