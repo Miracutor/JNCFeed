@@ -10,7 +10,7 @@
   !define APPNAME "JNCFeed"
   !define APP_NAME_IN_INSTALLED_DIR "JNCFeed"
   !define COMPANYNAME "Miracutor"
-  !define DESCRIPTION "Notification App for latest parts release on J-Novel Club."
+  !define DESCRIPTION "Setup for JNCFeed"
   !define DEVELOPER "Miracutor" #License Holder
   # Files Directory
   !define FILE_DIR "..\dist" #Replace with the full path of install folder

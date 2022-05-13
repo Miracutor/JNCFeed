@@ -1,5 +1,5 @@
-# JNCFeed is a Python application that can inform you the latest parts availability of your followed series on
-# J-Novel Club.
+# JNCFeed is an app that can notify you when the latest parts available
+# of your followed series on J-Novel Club.
 
 # Copyright (C) 2021 Miracutor
 
@@ -24,9 +24,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 from reader import make_reader
 
+from jncfeed.notifywin import identify_app_id, toast_notification
 from jncfeed.setup import configure_setup
 from jncfeed.ui import system_tray, login_window, error_window
-from jncfeed.notifywin import identify_app_id, toast_notification
 
 path_config_dir = Path.home() / Path(".jncfeed")
 path_config = path_config_dir / Path("config")
