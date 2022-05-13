@@ -36,7 +36,7 @@
 
   ;Name and file
   Name "${APPNAME}"
-  OutFile "${APPNAME}-v${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}-dev-Windows-x64-Setup.exe"
+  OutFile "${APPNAME}-v${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}-Windows-x64-Setup.exe"
 
   ;Default installation folder
   InstallDir "$PROGRAMFILES64\${APPNAME}"
