@@ -20,6 +20,7 @@ build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/
 dirty-build = "pipenv run pyinstaller --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --hidden-import 'reader.plugins.ua_fallback' --noconsole jncfeed/main.py"
 build-onefile = "pipenv run pyinstaller -F --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --hidden-import 'reader.plugins.ua_fallback' --noconsole --clean jncfeed/main.py"
 dirty-build-onefile = "pipenv run pyinstaller -F --upx-dir ../upx-3.96-win64 -n JNCFeed -i media/logo.ico --add-data media/logo.ico;. --version-file version --hidden-import 'reader.plugins.ua_fallback' --noconsole jncfeed/main.py"
+generate-setup = "makensis setup/JNCFeedSetup.nsi"
 
 [requires]
 python_version = "3.8"
