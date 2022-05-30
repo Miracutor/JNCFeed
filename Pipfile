@@ -9,7 +9,7 @@ requests = "*"
 pysimplegui = "*"
 psgtray = "*"
 apscheduler = "*"
-winrt = "*"
+winsdk = "*"
 
 [dev-packages]
 black = "*"
