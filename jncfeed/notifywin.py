@@ -17,17 +17,18 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import sys
 
-from winrt.windows.ui.notifications import (
+from winsdk.windows.ui.notifications import (
     ToastNotificationManager,
     ToastNotification,
 )
-from winrt.windows.data.xml.dom import XmlDocument
+from winsdk.windows.data.xml.dom import XmlDocument
 import subprocess
+import webbrowser
 from pathlib import Path
 from xml.etree import ElementTree
 
 
-def toast_notification(app_id, title, text, image_src):
+def toast_notification(app_id, title, text, url, image_src):
     top = ElementTree.Element("toast")
     top.set("duration", "short")
     visual = ElementTree.SubElement(top, "visual")
@@ -49,8 +50,12 @@ def toast_notification(app_id, title, text, image_src):
 
     doc = XmlDocument()
     doc.load_xml(ElementTree.tostring(top, encoding="utf-8").decode("utf-8"))
+
+    notification = ToastNotification(doc)
+    notification.add_activated(lambda s, e: webbrowser.open(url))
+
     notifier = ToastNotificationManager.create_toast_notifier(app_id)
-    notifier.show(ToastNotification(doc))
+    notifier.show(notification)
 
 
 def identify_app_id(app_name: str):

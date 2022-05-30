@@ -49,8 +49,10 @@ def check_setup():
         return True
 
 
-def generate_jnc_notification(message: str):
-    toast_notification(appId, f"{jnc_username}'s Followed Series", message, "logo.ico")
+def generate_jnc_notification(message: str, link: str):
+    toast_notification(
+        appId, f"{jnc_username}'s Followed Series", message, link, "logo.ico"
+    )
 
 
 def load_reader():
@@ -67,7 +69,7 @@ def update_jnc_feed(jnc_reader):
     jnc_reader.update_feeds()
     for entry in jnc_reader.get_entries(read=False, limit=15):
         jnc_reader.mark_entry_as_read(entry)
-        generate_jnc_notification(entry.title)
+        generate_jnc_notification(entry.title, entry.link)
     print(jnc_reader.get_entry_counts())
     jnc_reader.close()
 
