@@ -27,6 +27,19 @@ def jnc_login(user, password):
     )
 
 
+new_login_endpoint = "https://labs.j-novel.club/app/v1/auth/login"
+
+
+def new_jnc_login(user, password):
+    return requests.post(
+        new_login_endpoint,
+        json={"login": user, "password": password},
+        timeout=15,
+        headers={"accept": "application/json", "content-type": "application/json"},
+        params={"format": "json"},
+    )
+
+
 def get_user(user, password):
     data = jnc_login(user, password)
     print(data.json())
