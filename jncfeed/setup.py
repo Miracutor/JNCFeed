@@ -17,10 +17,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import json
 from pathlib import Path
+
+from jncfeed.constants import get_config_dir_path
 from jncfeed.jncapi import get_user
 from reader import make_reader
 
-path_config_dir = Path.home() / Path(".jncfeed")
+path_config_dir = get_config_dir_path()
 path_config = path_config_dir / Path("config")
 path_database = path_config_dir / Path("db.sqlite")
 

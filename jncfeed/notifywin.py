@@ -27,8 +27,10 @@ import webbrowser
 from pathlib import Path
 from xml.etree import ElementTree
 
+from jncfeed.constants import get_icon_path
 
-def toast_notification(app_id, title, text, url, image_src):
+
+def toast_notification(app_id, title, text, url):
     top = ElementTree.Element("toast")
     top.set("duration", "short")
     visual = ElementTree.SubElement(top, "visual")
@@ -39,7 +41,7 @@ def toast_notification(app_id, title, text, url, image_src):
     image_tag.set("id", "1")
     image_tag.set("placement", "appLogoOverride")
     image_tag.set(
-        "src", str((Path(sys.executable).parent / Path(image_src)).absolute())
+        "src", str(get_icon_path())
     )
     title_tag = ElementTree.SubElement(binding, "text")
     title_tag.set("id", "1")

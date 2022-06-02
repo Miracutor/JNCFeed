@@ -24,11 +24,12 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 from reader import make_reader
 
+from jncfeed.constants import get_config_dir_path, get_icon_path, get_entry_limit
 from jncfeed.notifywin import identify_app_id, toast_notification
 from jncfeed.setup import configure_setup
 from jncfeed.ui import system_tray, login_window, error_window
 
-path_config_dir = Path.home() / Path(".jncfeed")
+path_config_dir = get_config_dir_path()
 path_config = path_config_dir / Path("config")
 path_database = path_config_dir / Path("db.sqlite")
 rss_reader = None
@@ -50,9 +51,7 @@ def check_setup():
 
 
 def generate_jnc_notification(message: str, link: str):
-    toast_notification(
-        appId, f"{jnc_username}'s Followed Series", message, link, "logo.ico"
-    )
+    toast_notification(appId, f"{jnc_username}'s Followed Series", message, link)
 
 
 def load_reader():
@@ -67,7 +66,7 @@ def load_reader():
 
 def update_jnc_feed(jnc_reader):
     jnc_reader.update_feeds()
-    for entry in jnc_reader.get_entries(read=False, limit=15):
+    for entry in jnc_reader.get_entries(read=False, limit=get_entry_limit()):
         jnc_reader.mark_entry_as_read(entry)
         generate_jnc_notification(entry.title, entry.link)
     print(jnc_reader.get_entry_counts())
@@ -83,7 +82,7 @@ def main():
             appId = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\powershell.exe"
 
         # check the existence of the logo.ico file
-        if not (Path(sys.executable).parent / Path("logo.ico")).exists():
+        if not (get_icon_path()).exists():
             # if not, display error_window with error message
             error_window(
                 "Error",
